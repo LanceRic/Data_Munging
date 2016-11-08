@@ -43,7 +43,7 @@
 \usepackage{dcolumn}% Align table columns on decimal point
 \usepackage{bm}% bold math
 \usepackage{mathtools}
-\graphicspath{ {pics/} }
+\graphicspath{ {EDA_project_report_pics/} }
 %\usepackage[mathlines]{lineno}% Enable numbering of text and display math
 %\linenumbers\relax % Commence numbering lines
 
@@ -67,18 +67,17 @@
 
 
 \begin{abstract}
-	Is there a significant difference in cost and earnings for the three different school types (Public, Private Non-profit, and Private for-profit) present in the College Scorecard data? In order to measure and quantify these differences a discussion of completeness and model suitability is required. Completeness of the college scorecard data set is assessed in order provide a hard limit on the utility of said data set and how that impacts the overall reliability of the conclusions drawn. Our statistical analysis consisted of an analysis of variance(ANOVA) and a multiple linear regression model(MLR). Both ANOVA and MLR require that certain assumptions are met in order to guarantee the credibility of the results. The results of our linear modeling indicate that further efforts must be made in order capture diminishing marginal returns of cost in our earnings function and that our earnings function was missing a variable accounting for the talent of the student body.
+Is there a significant difference in cost and earnings for the three different school types (Public, Private Non-profit, and Private for-profit) present in the College Scorecard data? In order to measure and quantify these differences a discussion of completeness and model suitability is required. Completeness of the college scorecard data set is assessed in order provide a hard limit on the utility of said data set and how that impacts the overall reliability of the conclusions drawn. Our statistical analysis consisted of an analysis of variance(ANOVA) and a multiple linear regression model(MLR). Both ANOVA and MLR require that certain assumptions are met in order to guarantee the credibility of the results. The results of our linear modeling indicate that further efforts must be made in order capture diminishing marginal returns of cost in our earnings function and that our earnings function was missing a variable accounting for the talent of the student body.
 \end{abstract}
 
 \maketitle
 %\tableofcontents
 
 \section{\label{sec:level1}Introduction}
-Picking the right school is a very important choice to make.  The government has good reason to help students and parents make more informed choices about where students should go to college.  It helps the government because there will probably be more productive members of society if they make better choices about their education.  These better choices could lead to more positive outcomes of debt repayment, more money cycling through the economic machine, and more taxes being paid to the government.  In addition, having more information about colleges can help the government make better choices about which colleges they should invest more money into.  All of these motivations are centered around which colleges are most valuable to the individual students and to the government as a whole.  This begs the question: how do we define how valuable a college is?  One possible definition involves some combination of future earnings and total cost of education.
+Picking the right school is a very important choice to make.  The government has good reason to help students and parents make more informed choices about where students should go to college.  It helps the government because there will probably be more productive members of society if they make better choices about their education.  These better choices could lead to more positive outcomes of debt repayment, more money cycling through the economic machine, and more taxes being paid to the government.  In addition, having more information about colleges can help the government make better choices about which colleges they should invest more money into.  All of these motivations are centered around which colleges are most likely to produce higher earning graduates which is important to students and to the government as a whole.  This begs the question: how do we define a college's value?  One possible definition involves some combination of future earnings and total cost of education.
 
 \section{\label{sec:level1}Variables of Interest and Statement of Thesis}
-These motivations inspired us to look at certain variables in the College Scorecard dataset.  The general variables of interest are earnings and cost.  The specific variables in the dataset that we focused our attention on are total cost of attendance and median earnings of un-enrolled students 10 years after their first reported enrollment date.  We were curious to see whether there were significant differences in these two variables between different school types, so we also looked at the variable named control.  The variable categorizes all schools by whether they are public, private for-profit, or private nonprofit. Our thesis statement focuses on these variables: \textit{ Is there a significant difference in cost and earnings for these three types of school?}  After identifying our variables of interest and thesis statement, we must look at these variables in more detail.
-
+The variables of interest are median earnings 10 years after graduation for a given institution and average yearly cost of living plus tuition.  We were curious to see whether there were significant differences in these two variables between different school types, so we also looked at the variable named control, which categorizes all schools by whether they are public, private for-profit, or private nonprofit. The goal of this analysis is to detect and quantify a significant difference in cost and earnings across these three types of school if such a difference exists.  
 
 \section{\label{sec:level1}Completeness}
 Here will be a discussion of how complete the college scorecard is.Breakdown of individual characteristic... etc. 
@@ -91,8 +90,9 @@ A natural way to analyze the difference among group means is through the use of 
 
 % Mon Nov  7 16:25:58 2016
 \begin{table}[ht]
+	\caption{ANOVA of Median Earnings 10 Years Out}
+	\label{Table 1}
 	\centering
-	\caption{Summary of ANOVA for Earnings on Public and Private Nonprofit Institutions}
 	\begin{tabular}{lrrrrr}
 		  \hline
 		   & Df & Sum Sq & Mean Sq & F value & Pr($>$F) \\ 
@@ -104,14 +104,15 @@ A natural way to analyze the difference among group means is through the use of 
 \end{table}
 
 
-The table shows that there is a significant difference in the means of median earnings between public and private nonprofit schools, with an F value of 835 (one degree of freedom).  We also looked at the distributions of total cost of attendance for the three school types and concluded that ANOVA would not be a suitable way to study the relationship between cost and school type (Figure 2).  The distributions for the three school types are either multimodal or have heavy tails.  We then moved onto another option for studying the relationship between cost and school type.
+Table 1 shows that there is a significant difference in the means of median earnings between public and private nonprofit schools, with an F value of 835 (one degree of freedom).  We also looked at the distributions of total cost of attendance for the three school types and concluded that ANOVA would not be a suitable way to study the relationship between cost and school type (Figure 2).  The distributions for the three school types are either multimodal or have heavy tails.  We then moved onto another option for studying the relationship between cost and school type.
+
 \begin{figure}[h]
-\caption{Density Plot of Earnings for Different School Type}
+\caption{Density Plots of Earnings for Different School Types}
 \includegraphics[width=8cm, height=7cm]{earnings.png}
 \end{figure}
 
 \begin{figure}[h]
-\caption{Density Plot of Cost for Different School Types}
+\caption{Density Plots of Cost for Different School Types}
 \includegraphics[width=8cm, height=7cm]{cost.png}
 \end{figure}
 
@@ -136,8 +137,8 @@ The equation shown above can be thought of as a simple linear regression with th
 % Date and time: Mon, Nov 07, 2016 - 11:20:10 AM
 % Requires LaTeX packages: dcolumn 
 \begin{table}[!htbp] \centering 
-  \caption{Results\footnote{Table created by stargazer v.5.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu}} 
-  \label{} 
+  \caption{Multiple Linear Regression\footnote{Table created by stargazer v.5.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu}} 
+  \label{Table 2} 
 \begin{tabular}{@{\extracolsep{5pt}}lD{.}{.}{-3} } 
 \\[-1.8ex]\hline 
 \hline \\[-1.8ex] 
@@ -170,22 +171,22 @@ F Statistic & \multicolumn{1}{c}{1,300.003$^{***}$ (df = 3; 7520)} \\
 \end{table} 
 
 \subsubsection{Results}
-The results in Table 2 indicate that 34\% of variation in Earnings are explained by the regression equation. With an F statistic of 1,300.003 we can infer that there is a significant relationship between our independent variables and dependent variable. Coefficients for Cost, Control: Private non-profit, Control: Public, and Constant are all significant at the commonly accepted values of \alpha. 
+The results in Table 2 indicate that 34\% of variation in Earnings are explained by the regression equation. With an F statistic of 1,300.0 we can infer that there is a significant relationship between our independent variables and dependent variable. Coefficients for Cost, Control: Private non-profit, Control: Public, and Constant are all significant at the commonly accepted values of \alpha. 
 
-\subsubsection{Interpretting Cost}
-The coefficient on the \textit{Cost} term implies that for a \$1 increase in yearly average cost would amount to a \$.71 increase in median earnings 10 years after graduation. Intuitively a positive coefficient is what we would expect; with costs rising we would expect the quality of education to increase and the cost of living to increase, ceterus parabus. Assuming that increasing costs can be used as a proxy for the quality of education is a strong assumption, instead we expand to include the cost of living as well. When tuition and cost of living go up, we would expect earnings to follow. Our model suggests that a student at a four year institution can expect \$.71 on the dollar spent towards cost of living and tuition, ceterus parabus. 
+\subsubsection{Interpreting Cost}
+Our model suggests that a student at a four year institution can expect \$.71 on the dollar spent towards cost of living and tuition, ceterus parabus. Intuitively, the positive relationship between cost and earnings is to be expected because education is an investment, and the greater amount invested suggests a greater return. However, it is also interesting to note that the coefficient for Cost is between zero and one; presumably Earnings is a fraction of Cost because the Cost variable encompasses both the tuition and the cost of living. 
 
-\subsubsection{Interpretting Control}
+\subsubsection{Interpreting Control}
 The coefficients of Control: Private nonprofit and Control: Public are measured relative to the missing category (Control: for-profit).  Control: Private non-profit has a positive coefficient of 2,661.87 which can be interpreted as the increase in median earnings 10 years after graduation by attending a private non-profit over a private for-profit.  Similarly, the coefficient of 9,620.30 can be interpreted as the increase in median earnings 10 years after graduation by attending a public institution over a private for-profit institution.
 
 
-\subsubsection{Recomendations and Further Research}
-If a students main priority is to maximize their earning potential 10 years after graduation, our model would suggest that they should consider attending a public school and spend as much as possible. For obvious reasons this cannot be the case, there must exist a point at which earnings experiences diminishing marginal returns with respect to cost. We recommend that in further analysis we include a quadratic cost term in order to test our hypothesis regarding diminishing marginal returns. Our model explained roughly 34\% of variation in Earnings which leads us to believe that there are lurking variable which could increase our explanatory power.  Currently, our model lacks any kind of proxy for the talent present at a given university.  A substantial amount of literature suggests a significant positive relationship between an individuals earnings and their IQ. Using a variable for median/mean SAT scores for a given institution would serve as a good proxy for IQ and hopefully increase the overall explanatory power.  
+\subsubsection{Recommendations and Further Research}
+If a students main priority is to maximize their earning potential 10 years after graduation, our model would suggest that they should consider attending a public school and spend as much as possible. For obvious reasons this cannot be the case, there must exist a point at which earnings experiences diminishing marginal returns with respect to cost. We recommend that in further analysis we include a quadratic cost term in order to test our hypothesis regarding diminishing marginal returns. Our model explained roughly 34\% of variation in Earnings which leads us to believe that there is omitted variable bias which could increase our explanatory power.  Currently, our model lacks any kind of proxy for the talent present at a given university.  A substantial amount of literature suggests a significant positive relationship between an individuals earnings and their IQ. Using a variable for median/mean SAT scores for a given institution would serve as a good proxy for IQ and hopefully increase the overall explanatory power.  
 
 \section{\label{sec:level1}Conclusions}
-After accessing completeness of the data and performing the above analysis, we came to a few conclusions.  The first and most jarring conclusion was that the data is very sparse for many of the variables of interest to us.  The second main conclusion was that the ANOVA showed a significant difference in median earnings for public and private nonprofit schools.  The third main conclusion was that a linear model showed a possible relationship between cost, earnings, and school type.
+After assessing completeness of the data and performing the above analysis, we came to a few conclusions.  The first and most jarring conclusion was that the data is very sparse for many of the variables of interest to us.  The second main conclusion was that the ANOVA showed a significant difference in median earnings for public and private nonprofit schools.  The third main conclusion was that a linear model showed a possible relationship between cost, earnings, and school type.
 
-Future areas to concentrate on would be incorporating average SAT scores into the linear model and calculating the NPV (Net Present Value) of going to each school.  This would both help to illuminate what makes a school more valuable to students, the government, and society as a whole.
+Future areas to concentrate on would be incorporating average SAT scores into the linear model and calculating the NPV (Net Present Value) of going to each school.  This would both help to illuminate what makes a school more likely to produce higher earning graduates to students, the government, and society as a whole.
 
 
 \end{document}
